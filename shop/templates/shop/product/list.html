@@ -1,47 +1,89 @@
-{% extends 'base.html' %}
-{% block content %}
-{% load static %}
-    <nav class="navbar-dark" style="background-color: #016C3E;">
-        <a href="{% url 'admin:index' %}"><font color="#016C3E" position: top: 1000px; face="comic sans ms"> </font></a>
-        <div class="p-4 pt-5">
-            <div class="container">
-                <div class="row p-4 pt-5">
-                     
-                    <a class="navbar-brand " href="/">
-                        <img src="{% static 'image/logo.png' %}" width="100" height="100" alt="">
-                        СБЕР КАФЕ
-                    </a>
-                </div>
-                <div class="row p-2">
-                    <a class="btn btn-outline-light btn-block btn-lg" href="/">Все категории</a>
-                </div>
-                {% for category in categories %}
-                <div class="row p-2">
-                    <a class="btn btn-outline-light btn-block btn-lg" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                </div>
-                {% endfor %}
-                <div class="row pt-5">
-                    {% with totail_items=cart|length %}
-                    {% if cart|length > 0 %}
-                    <a class="btn btn-outline-warning btn-block btn-lg" href="{% url 'cart:cart_detail' %}">
-                        Корзина <span class="badge badge-secondary">{{ totail_items }}</span>
-                    </a>
-                    {% else %}
-                    <a class="btn btn-outline-warning btn-block btn-lg" href="{% url 'cart:cart_detail' %}">
-                        Корзина пуста
-                    </a>
-                    {% endif %}
-                    {% endwith %}
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СБЕР КАФЕ</title>
+    <link scr="node_modules\bootstrap\dist\js\bootstrap.min.js"></link>
+    <link rel="stylesheet" href="static\css\main.css">
+  
+</head>
+
+<body>
+  <div class="container">
+    <header class="navigator-bar" id="navbar">
+      <div class="left">
+        <div class="col">
+          <a class="navbar-brand " href="/">
+            <img src="{% static 'image/logo.png' %}" width="100" height="100" alt="">
+          </a>
         </div>
-    </nav>
-    <div id="content" class="p-4 p-md-5">
-        <div class="album py-5">
+        <div class="navbar-col">
+          <a class="navbar-brand" href="#menu-scroll">Меню</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="navbar-col">
+          <a class="navbar-brand" href="#">О нас</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-4">
+        <button type="button" class="btn btn-light" style="margin-left: 78%;">
+          <div class="user-login">Войти</div>
+        </button>
+      </div>
+    </header>
+    
+    <selection class="week-choice">
+      <a class="first-week" href="#">
+        1 неделя
+      </a>
+      <a class="second-week" href="#">
+        2 неделя
+      </a>
+    </selection>
+
+    <selection class="main-menu-categories" data-bs-spy="scroll" data-bs-target="#navbar">
+        <div class="main-menu-categories-selection-wrap" id="menu-scroll">
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Новинки</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Акции</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Салаты</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Супы</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Гарниры</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Напитки</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 5px;">
+            <div class="main-menu-categories-tittle">Чай</div>
+          </button>
+          <button type="button" class="btn btn-light" style="margin: 10px;">
+            <div class="main-menu-categories-tittle">Десерты, выпечка</div>
+          </button>
+        </div>
+    </selection>
+    <selection> 
+        <div class="food-map">
             <div class="container">
                 <div class="row">
                     {% for product in products %}
-                    <div class="col-md-4">
+                    <div class="col-md-4 padding: 0px; margin: 0px;">
                         <div class="card mb-4 shadow-sm">
                             <img class="card-img-top" src="{{product.image.url }}" style="--size: 250px; aspect-ratio: 1.00; width: var(--size); margin: auto; display: block;" alt="изображение продукта">
                             <div class="card-body">
@@ -55,5 +97,9 @@
                 </div>
             </div>
         </div>
-    </div>
-{% endblock %}
+    </selection>
+    <selection class="information-table">
+      
+    </selection>
+  </div>
+</body>
